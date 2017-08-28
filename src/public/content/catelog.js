@@ -114,6 +114,11 @@ const topicsList = [
     title: '相对路径',
     url:
       'https://github.com/xugy0926/getting-started-with-javascript/blob/master/topics/%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84.md'
+  },
+  {
+    title: 'JS函数',
+    url:
+      'https://github.com/xugy0926/getting-started-with-javascript/blob/master/topics/JS%E5%87%BD%E6%95%B0.md'
   }
 ];
 
