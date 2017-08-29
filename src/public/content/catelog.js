@@ -122,7 +122,7 @@ const topicsList = [
   },
   {
     title: '两种定义函数方式的差异',
-    url: 'https://github.com/xugy0926/getting-started-with-javascript/blob/master/topics/%E4%B8%A4%E7%A7%8D%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0%E6%96%B9%E5%BC%8F%E7%9A%84%E5%B7%AE%E5%BC%82.mdÏ'
+    url: 'https://github.com/xugy0926/getting-started-with-javascript/blob/master/topics/%E4%B8%A4%E7%A7%8D%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0%E6%96%B9%E5%BC%8F%E7%9A%84%E5%B7%AE%E5%BC%82.md'
   }
 ];
 
