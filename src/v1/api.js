@@ -12,5 +12,7 @@ router.put('/learnJS/course/:id/words', learnJS.updateWords);
 router.get('/learnJS/course/:id/homework', learnJS.homeworkInfo);
 router.get('/learnJS/course/:id/homework/:number', learnJS.homework);
 router.put('/learnJS/course/:id/homework/:number', learnJS.updateHomework);
+router.get('/learnJS/course/:id/teams', learnJS.teams);
+router.put('/learnJS/course/:id/teams', learnJS.updateTeams);
 
 export default router;

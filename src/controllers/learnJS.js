@@ -23,7 +23,10 @@ export function updateCatelog(req, res) {
 }
 
 export function words(req, res) {
-  jsonfile.readFile(config.wordsFilePath, function(err, words) {
+  const id = req.params.id;
+  var filePath = config.wordsFilePath + '_' + id + '.json';
+
+  jsonfile.readFile(filePath, function(err, words) {
     if (err) {
       res.json({ result: { code: 0, message: '获取数据失败' } });
       return;
@@ -34,11 +37,17 @@ export function words(req, res) {
 }
 
 export function updateWords(req, res) {
+  const id = req.params.id;
   const words = req.body.words;
+  var filePath = config.wordsFilePath + '_' + id + '.json';
 
-  fs.unlinkSync(config.wordsFilePath);
+  try {
+    fs.unlinkSync(filePath);
+  } catch (err) {
+    // do nothing
+  }
 
-  jsonfile.writeFile(config.wordsFilePath, words, { spaces: 2 }, function(err) {
+  jsonfile.writeFile(filePath, words, { spaces: 2 }, function(err) {
     if (err) {
       res.json({ result: { code: 0, message: '更新失败' } });
     } else {
@@ -48,15 +57,16 @@ export function updateWords(req, res) {
 }
 
 export function homeworkInfo(req, res) {
+  const id = req.params.id;
+
   fs.readdir(config.homeworkPath, function(err, files) {
-    console.log(files);
     if (err) {
       res.json({ result: { code: 0, message: '获取失败' } });
     } else {
       var homeworkInfoList = [];
       files.forEach((item, index) => {
         let file = jsonfile.readFileSync(
-          config.homeworkPath + 'lesson' + (index + 1) + '.json'
+          config.homeworkPath + 'lesson' + id + '_' + (index+1) + '.json'
         );
         homeworkInfoList.push({
           url: 'homework/' + (index + 1),
@@ -71,7 +81,8 @@ export function homeworkInfo(req, res) {
 
 export function homework(req, res) {
   const id = req.params.id;
-  var filePath = config.homeworkPath + '/lesson' + id + '.json';
+  const number = req.params.number;
+  var filePath = config.homeworkPath + '/lesson' + id + '_' + number + '.json';
 
   jsonfile.readFile(filePath, function(err, homeworks) {
     if (err) {
@@ -82,6 +93,56 @@ export function homework(req, res) {
   });
 }
 
-export function updateHomework(req, res, next) {
-  // TODO:
+export function updateHomework(req, res) {
+  const id = req.params.id;
+  const number = req.params.number;
+  var filePath = config.homeworkPath + '/lesson' + id + '_' + number + '.json';  
+  const homeworkInfo = req.body.homeworkInfo;
+  
+    try {
+      fs.unlinkSync(filePath);
+    } catch (err) {
+      // do nothing
+    }
+  
+    jsonfile.writeFile(filePath, homeworkInfo, { spaces: 2 }, function(err) {
+      if (err) {
+        res.json({ result: { code: 0, message: '更新失败' } });
+      } else {
+        res.json({ result: { code: 1, message: '更新成功' } });
+      }
+    });
+}
+
+export function teams(req, res) {
+  const id = req.params.id;
+  const filePath = config.teamsInfoPath + id + '.md';
+
+  fs.readFile(filePath, 'utf-8', function (err, teamInfo) {
+    if (err) {
+      res.json({ result: { code: 0, message: '获取数据失败' } });
+    } else {
+      res.json({ result: { code: 1, teamInfo } });
+    }
+  });
+}
+
+export function updateTeams(req, res) {
+  const id = req.params.id;
+  const teamInfo = req.body.teamInfo;
+  const filePath = config.teamsInfoPath + id + '.md';
+  
+  try {
+    fs.unlinkSync(filePath);
+  } catch (err) {
+    // do nothing
+  }
+  
+  fs.writeFile(filePath, teamInfo, function(err) {
+    if (err) {
+      res.json({ result: { code: 0, message: '更新失败' } });
+    } else {
+      res.json({ result: { code: 1, message: '更新成功' } });
+    }
+  });
 }

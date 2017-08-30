@@ -30,3 +30,17 @@ describe('GET /api/v1/learnJS/course/1/homework/1', () => {
     await request(app).get('/api/v1/learnJS/course/1/homework/1').expect(200);
   });
 });
+
+describe('GET /api/v1/learnJS/course/1/teams', () => {
+  it('should return json', async () => {
+    await request(app).get('/api/v1/learnJS/course/1/teams').expect(200);
+  });
+});
+
+
+describe('PUT /api/v1/learnJS/course/1/teams', () => {
+  it('should return json', async () => {
+    await request(app).put('/api/v1/learnJS/course/1/teams').send({ teamInfo: '#### test' }).expect(200);
+  });
+});
+

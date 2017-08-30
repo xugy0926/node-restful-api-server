@@ -14,5 +14,6 @@ export const catelogFilePath = path.join(
   __dirname,
   '/public/content/catelog.json'
 );
-export const wordsFilePath = path.join(__dirname, '/public/content/words.json');
+export const wordsFilePath = path.join(__dirname, '/public/content/words');
 export const homeworkPath = path.join(__dirname, '/public/content/homework/');
+export const teamsInfoPath = path.join(__dirname, '/public/content/teams/');
