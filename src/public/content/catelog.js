@@ -86,6 +86,10 @@ const topicsList = [
       'https://github.com/xugy0926/getting-started-with-javascript/blob/master/topics/%E5%AE%89%E8%A3%85nvm.md'
   },
   {
+    title: '如何在终端执行代码',
+    url: 'https://github.com/xugy0926/getting-started-with-javascript/blob/master/topics/%E5%A6%82%E4%BD%95%E5%9C%A8%E7%BB%88%E7%AB%AF%E6%89%A7%E8%A1%8C%E4%BB%A3%E7%A0%81.md'
+  },
+  {
     title: '【第二节知识点】定义变量',
     url:
       'https://github.com/xugy0926/getting-started-with-javascript/blob/master/topics/%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F.md'
