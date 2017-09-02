@@ -3,6 +3,11 @@ import * as learnJS from '../controllers/learnJS';
 
 const router = express.Router();
 
+router.get('/learnJS/sayToMe', learnJS.sayToMe);
+router.post('/learnJS/sayToMe', learnJS.addSayToMe);
+// router.put('/learnJS/sayToMe', learnJS.updateSayToMe);
+router.delete('/learnJS/sayToMe', learnJS.deleteSayToMe);
+
 // course
 router.get('/learnJS/course/:id/detail', learnJS.courseInfo);
 router.get('/learnJS/course/:id/catelog', learnJS.catelog);

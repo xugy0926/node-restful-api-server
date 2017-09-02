@@ -11,7 +11,7 @@ const schema = new Schema({
     fields: {
       courseInfo
     },
-  }),
+  })
 });
 
 export default schema;

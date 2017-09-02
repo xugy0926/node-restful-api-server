@@ -1,20 +1,19 @@
 import * as config from '../config';
 import fs from 'fs';
 import jsonfile from 'jsonfile';
+import * as SayToMe from '../data/proxy/sayToMe';
 
 let catelogContent = require('../public/content/catelog');
 
 export function courseInfo(req, res) {
   res.json({
-    result: {
-      code: 1,
-      courseInfo: config.courseInfo
-    }
+    code: 1,
+    courseInfo: config.courseInfo
   });
 }
 
 export function catelog(req, res) {
-  res.json({ result: { code: 1, catelog: catelogContent } });
+  res.json({ code: 1, catelog: catelogContent });
 }
 
 export function updateCatelog(req, res) {
@@ -28,11 +27,11 @@ export function words(req, res) {
 
   jsonfile.readFile(filePath, function(err, words) {
     if (err) {
-      res.json({ result: { code: 0, message: '获取数据失败' } });
+      res.json({ code: 0, message: '获取数据失败' });
       return;
     }
 
-    res.json({ result: { code: 1, words } });
+    res.json({ code: 1, words });
   });
 }
 
@@ -49,9 +48,9 @@ export function updateWords(req, res) {
 
   jsonfile.writeFile(filePath, words, { spaces: 2 }, function(err) {
     if (err) {
-      res.json({ result: { code: 0, message: '更新失败' } });
+      res.json({ code: 0, message: '更新失败' });
     } else {
-      res.json({ result: { code: 1, message: '更新成功' } });
+      res.json({ code: 1, message: '更新成功' });
     }
   });
 }
@@ -61,12 +60,12 @@ export function homeworkInfo(req, res) {
 
   fs.readdir(config.homeworkPath, function(err, files) {
     if (err) {
-      res.json({ result: { code: 0, message: '获取失败' } });
+      res.json({ code: 0, message: '获取失败' });
     } else {
       var homeworkInfoList = [];
       files.forEach((item, index) => {
         let file = jsonfile.readFileSync(
-          config.homeworkPath + 'lesson' + id + '_' + (index+1) + '.json'
+          config.homeworkPath + 'lesson' + id + '_' + (index + 1) + '.json'
         );
         homeworkInfoList.push({
           url: 'homework/' + (index + 1),
@@ -74,7 +73,7 @@ export function homeworkInfo(req, res) {
         });
       });
 
-      res.json({ result: { code: 1, homeworkInfo: homeworkInfoList } });
+      res.json({ code: 1, homeworkInfo: homeworkInfoList });
     }
   });
 }
@@ -86,9 +85,9 @@ export function homework(req, res) {
 
   jsonfile.readFile(filePath, function(err, homeworks) {
     if (err) {
-      res.json({ result: { code: 0, message: '获取数据失败' } });
+      res.json({ code: 0, message: '获取数据失败' });
     } else {
-      res.json({ result: { code: 1, homeworks } });
+      res.json({ code: 1, homeworks });
     }
   });
 }
@@ -96,33 +95,33 @@ export function homework(req, res) {
 export function updateHomework(req, res) {
   const id = req.params.id;
   const number = req.params.number;
-  var filePath = config.homeworkPath + '/lesson' + id + '_' + number + '.json';  
+  var filePath = config.homeworkPath + '/lesson' + id + '_' + number + '.json';
   const homeworkInfo = req.body.homeworkInfo;
-  
-    try {
-      fs.unlinkSync(filePath);
-    } catch (err) {
-      // do nothing
+
+  try {
+    fs.unlinkSync(filePath);
+  } catch (err) {
+    // do nothing
+  }
+
+  jsonfile.writeFile(filePath, homeworkInfo, { spaces: 2 }, function(err) {
+    if (err) {
+      res.json({ code: 0, message: '更新失败' });
+    } else {
+      res.json({ code: 1, message: '更新成功' });
     }
-  
-    jsonfile.writeFile(filePath, homeworkInfo, { spaces: 2 }, function(err) {
-      if (err) {
-        res.json({ result: { code: 0, message: '更新失败' } });
-      } else {
-        res.json({ result: { code: 1, message: '更新成功' } });
-      }
-    });
+  });
 }
 
 export function teams(req, res) {
   const id = req.params.id;
   const filePath = config.teamsInfoPath + id + '.md';
 
-  fs.readFile(filePath, 'utf-8', function (err, teamInfo) {
+  fs.readFile(filePath, 'utf-8', function(err, teamInfo) {
     if (err) {
-      res.json({ result: { code: 0, message: '获取数据失败' } });
+      res.json({ code: 0, message: '获取数据失败' });
     } else {
-      res.json({ result: { code: 1, teamInfo } });
+      res.json({ code: 1, teamInfo });
     }
   });
 }
@@ -131,18 +130,51 @@ export function updateTeams(req, res) {
   const id = req.params.id;
   const teamInfo = req.body.teamInfo;
   const filePath = config.teamsInfoPath + id + '.md';
-  
+
   try {
     fs.unlinkSync(filePath);
   } catch (err) {
     // do nothing
   }
-  
+
   fs.writeFile(filePath, teamInfo, function(err) {
     if (err) {
-      res.json({ result: { code: 0, message: '更新失败' } });
+      res.json({ code: 0, message: '更新失败' });
     } else {
-      res.json({ result: { code: 1, message: '更新成功' } });
+      res.json({ code: 1, message: '更新成功' });
     }
   });
+}
+
+export async function sayToMe(req, res) {
+  try {
+    let data = await SayToMe.find();
+    res.json({ code: 1, data });
+  } catch (err) {
+    res.json({ code: 0, message: err.message });
+  }
+}
+
+export async function addSayToMe(req, res) {
+  const name = req.body.name || '';
+  const account = req.body.account || '';
+  const content = req.body.content || '';
+
+  try {
+    let data = await SayToMe.create(name, account, content);
+    res.json({ code: 1, data });
+  } catch (err) {
+    res.json({ code: 0, message: err.message });
+  }
+}
+
+export async function deleteSayToMe(req, res) {
+  const id = req.body.id || '';
+
+  try {
+    await SayToMe.update(id, { delete: true });
+    res.json({ code: 1 });
+  } catch (err) {
+    res.json({ code: 0, message: err.message });
+  }
 }

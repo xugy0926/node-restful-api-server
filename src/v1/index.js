@@ -8,7 +8,10 @@ const md = new MarkdownIt();
 const router = express.Router();
 
 router.get('/', function(req, res, next) {
-  fs.readFile(path.join(__dirname, '../api-doc.md'), 'utf-8', function(err, file) {
+  fs.readFile(path.join(__dirname, '../api-doc.md'), 'utf-8', function(
+    err,
+    file
+  ) {
     if (err) {
       next();
     } else {

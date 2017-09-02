@@ -1,6 +1,6 @@
 import path from 'path';
 
-export const mongodbUrl = 'http://127.0.0.1:27017';
+export const mongodbUrl = 'mongodb://127.0.0.1:32771/learnJS';
 export const courseInfo = {
   title: 'JavaScript编程入门',
   teacher: '徐高阳',

@@ -9,12 +9,12 @@ function formatDate(date, friendly) {
   return date.format('YYYY-MM-DD HH:mm');
 }
 
-export default function (schema) {
-  schema.methods.create_at_ago = function () {
+export default function(schema) {
+  schema.methods.create_at_ago = function() {
     return formatDate(this.create_at, true);
   };
 
-  schema.methods.update_at_ago = function () {
+  schema.methods.update_at_ago = function() {
     return formatDate(this.update_at, true);
   };
 }

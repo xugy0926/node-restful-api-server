@@ -11,6 +11,8 @@ import v1Api from './v1/api';
 import index from './v1/index';
 import schema from './data/schema';
 
+require('./data/models/init');
+
 let app = express();
 
 // set cors
@@ -37,8 +39,8 @@ app.use(
     schema,
     graphiql: true,
     rootValue: { request: req },
-    pretty: true,
-  })),
+    pretty: true
+  }))
 );
 
 // catch 404 and forward to error handler

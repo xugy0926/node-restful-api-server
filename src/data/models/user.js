@@ -32,4 +32,6 @@ const UserSchema = new Schema({
 });
 
 UserSchema.plugin(BaseModel);
-mongoose.model('User', UserSchema);
+var UserModel = mongoose.model('User', UserSchema);
+
+export default UserModel;
