@@ -2,6 +2,9 @@ import * as config from '../config';
 import fs from 'fs';
 import jsonfile from 'jsonfile';
 import * as SayToMe from '../data/proxy/sayToMe';
+import MarkdownIt from 'markdown-it';
+
+let md = new MarkdownIt({breaks: true});
 
 //TODO:
 const phoneData = require('../user.phone_data');
@@ -165,6 +168,11 @@ export function updateTeams(req, res) {
 export async function sayToMe(req, res) {
   try {
     let data = await SayToMe.find();
+
+    for(let i = 0; i < data.length; i ++) {
+      data[i].content = md.render(data[i].content);
+    }
+
     res.json({ code: 1, data });
   } catch (err) {
     res.json({ code: 0, message: err.message });
@@ -186,6 +194,8 @@ export async function addSayToMe(req, res) {
     }
 
     let data = await SayToMe.create(name, account, content);
+    data.content = md.render(data.content);
+
     res.json({ code: 1, data });
   } catch (err) {
     res.json({ code: 0, message: err.message });
