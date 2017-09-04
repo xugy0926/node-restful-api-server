@@ -60,3 +60,6 @@ typings/
 # dist files
 dist
 
+user.email_data.js
+user.phone_data.js
+

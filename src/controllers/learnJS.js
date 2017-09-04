@@ -3,6 +3,22 @@ import fs from 'fs';
 import jsonfile from 'jsonfile';
 import * as SayToMe from '../data/proxy/sayToMe';
 
+//TODO:
+const phoneData = require('../user.phone_data');
+const xsPhone = {};
+for (const x of phoneData) {
+  const key = Object.keys(x)[0];
+  xsPhone[key] = x[key];
+}
+
+const emailData = require('../user.email_data');
+const xsEmail = {};
+for (const x of emailData) {
+  const key = Object.keys(x)[0];
+  xsEmail[key] = x[key];
+}
+
+
 let catelogContent = require('../public/content/catelog');
 
 export function courseInfo(req, res) {
@@ -161,6 +177,14 @@ export async function addSayToMe(req, res) {
   const content = req.body.content || '';
 
   try {
+    if (!account || !name || !content) {
+      throw new Error('name or account or content is null');
+    }
+
+    if (!checkPermission(account)) {
+      throw new Error('没有权限！' + account + ' 是你在新大注册的账号吗？');
+    }
+
     let data = await SayToMe.create(name, account, content);
     res.json({ code: 1, data });
   } catch (err) {
@@ -170,11 +194,31 @@ export async function addSayToMe(req, res) {
 
 export async function deleteSayToMe(req, res) {
   const id = req.body.id || '';
+  const account = req.body.account || '';
 
   try {
+
+    if (!checkPermission(account)) {
+      throw new Error('没有权限！' + account + ' 是你在新大注册的账号吗？');
+    }
+
     await SayToMe.update(id, { delete: true });
     res.json({ code: 1 });
   } catch (err) {
     res.json({ code: 0, message: err.message });
   }
+}
+
+function checkPermission(account) {
+  let hasPermission = false;
+
+  if (xsPhone[account]) {
+    hasPermission = true;
+  }
+
+  if (xsEmail[account]) {
+    hasPermission = true;
+  }
+
+  return hasPermission;
 }
