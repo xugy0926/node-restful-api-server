@@ -193,10 +193,20 @@ export async function addSayToMe(req, res) {
       throw new Error('没有权限！' + account + ' 是你在新大注册的账号吗？');
     }
 
-    let data = await SayToMe.create(name, account, content);
-    data.content = md.render(data.content);
+    let result = await SayToMe.findOne({ account });
+    console.log(result);
+    if (result) {
+      result.content = content;
+      result.name = name;
+      let data = await result.save();
+      data.content = md.render(data.content);  
+      res.json({ code: 1, data });
+    } else {
+      let data = await SayToMe.create(name, account, content);
+      data.content = md.render(data.content);
+      res.json({ code: 1, data });
+    }
 
-    res.json({ code: 1, data });
   } catch (err) {
     res.json({ code: 0, message: err.message });
   }

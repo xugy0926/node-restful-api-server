@@ -5,6 +5,11 @@ export function find(conditions, options) {
   return qy.exec();
 }
 
+export function findOne(conditions, options) {
+  const qy = SayToMeModel.findOne(conditions).setOptions(options);
+  return qy.exec();
+}
+
 export function update(id, data) {
   let qy = SayToMeModel.findByIdAndUpdate(id, { $set: data });
   return qy.exec();
