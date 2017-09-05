@@ -131,6 +131,14 @@ const topicsList = [
   {
     title: '函数 - 定义完就执行',
     url: 'https://github.com/xugy0926/getting-started-with-javascript/blob/master/topics/%E5%87%BD%E6%95%B0%20-%20%E5%AE%9A%E4%B9%89%E5%AE%8C%E5%B0%B1%E6%89%A7%E8%A1%8C.md'
+  },
+  {
+    title: 'callback函数的设计学',
+    url: 'https://github.com/xugy0926/getting-started-with-javascript/blob/master/topics/callback%E5%87%BD%E6%95%B0%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%AD%A6.md'
+  },
+  {
+    title: '[第9节课作业需要]了不起的axios(http)',
+    url: 'https://github.com/xugy0926/getting-started-with-javascript/blob/master/topics/%E4%BA%86%E4%B8%8D%E8%B5%B7%E7%9A%84axios(http).md'
   }
 ];
 
