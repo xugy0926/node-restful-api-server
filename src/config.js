@@ -1,6 +1,8 @@
 import path from 'path';
 
-export const mongodbUrl = 'mongodb://127.0.0.1:27017/learnJS';
+let dev = typeof (__DEV__) !== 'undefined' ? __DEV__ : false; 
+export const DEV = process.env.NODE_ENV !== 'production' || !dev ? true : false;
+export const mongodbUrl = DEV ? 'mongodb://127.0.0.1:32768/learnJS' : 'mongodb://127.0.0.1:27017/learnJS';
 export const courseInfo = {
   title: 'JavaScript编程入门',
   teacher: '徐高阳',

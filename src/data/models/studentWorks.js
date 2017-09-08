@@ -3,17 +3,18 @@ import BaseModel from './base_model';
 
 const Schema = mongoose.Schema;
 
-const SayToMeSchema = new Schema({
+const StudentWorksSchema = new Schema({
   name: { type: String, requried: true },
   account: { type: String, required: true },
-  content: { type: String, required: true },
+  url: { type: String, required: true },
+  member: { type: String, required: false },
+  description: { type: String, required: false },
   delete: { type: Boolean, default: false },
-  comment: { type: String, required: false },
   create_at: { type: Date, default: Date.now },
   update_at: { type: Date, default: Date.now }
 });
 
-SayToMeSchema.plugin(BaseModel);
-var SayToMeModel = mongoose.model('SayToMe', SayToMeSchema);
+StudentWorksSchema.plugin(BaseModel);
+var StudentWorksModel = mongoose.model('StudentWorks', StudentWorksSchema);
 
-export default SayToMeModel;
+export default StudentWorksModel;

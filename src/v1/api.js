@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/learnJS/sayToMe', learnJS.sayToMe);
 router.post('/learnJS/sayToMe', learnJS.addSayToMe);
-// router.put('/learnJS/sayToMe', learnJS.updateSayToMe);
+router.put('/learnJS/sayToMe', learnJS.updateSayToMe);
 router.delete('/learnJS/sayToMe', learnJS.deleteSayToMe);
 
 // course
@@ -19,5 +19,8 @@ router.get('/learnJS/course/:id/homework/:number', learnJS.homework);
 router.put('/learnJS/course/:id/homework/:number', learnJS.updateHomework);
 router.get('/learnJS/course/:id/teams', learnJS.teams);
 router.put('/learnJS/course/:id/teams', learnJS.updateTeams);
+router.get('/learnJS/course/:id/studentWorks', learnJS.studentWorks);
+router.post('/learnJS/course/:id/studentWorks', learnJS.addStudentWork);
+router.delete('/learnJS/course/:id/studentWorks', learnJS.deleteStudentWork);
 
 export default router;

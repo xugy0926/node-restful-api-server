@@ -2,9 +2,11 @@ import * as config from '../config';
 import fs from 'fs';
 import jsonfile from 'jsonfile';
 import * as SayToMe from '../data/proxy/sayToMe';
+import * as StudentWorks from '../data/proxy/studentWorks';
 import MarkdownIt from 'markdown-it';
+import { admin } from '../admin';
 
-let md = new MarkdownIt({breaks: true});
+let md = new MarkdownIt({ breaks: true });
 
 //TODO:
 const phoneData = require('../user.phone_data');
@@ -20,7 +22,6 @@ for (const x of emailData) {
   const key = Object.keys(x)[0];
   xsEmail[key] = x[key];
 }
-
 
 let catelogContent = require('../public/content/catelog');
 
@@ -169,7 +170,7 @@ export async function sayToMe(req, res) {
   try {
     let data = await SayToMe.find();
 
-    for(let i = 0; i < data.length; i ++) {
+    for (let i = 0; i < data.length; i++) {
       data[i].content = md.render(data[i].content);
     }
 
@@ -194,22 +195,24 @@ export async function addSayToMe(req, res) {
     }
 
     let result = await SayToMe.findOne({ account });
-    console.log(result);
     if (result) {
       result.content = content;
       result.name = name;
       let data = await result.save();
-      data.content = md.render(data.content);  
+      data.content = md.render(data.content);
       res.json({ code: 1, data });
     } else {
       let data = await SayToMe.create(name, account, content);
       data.content = md.render(data.content);
       res.json({ code: 1, data });
     }
-
   } catch (err) {
     res.json({ code: 0, message: err.message });
   }
+}
+
+export async function updateSayToMe(req, res) {
+
 }
 
 export async function deleteSayToMe(req, res) {
@@ -217,7 +220,6 @@ export async function deleteSayToMe(req, res) {
   const account = req.body.account || '';
 
   try {
-
     if (!checkPermission(account)) {
       throw new Error('没有权限！' + account + ' 是你在新大注册的账号吗？');
     }
@@ -229,16 +231,115 @@ export async function deleteSayToMe(req, res) {
   }
 }
 
+export async function addCommentForSayToMe(req, res) {
+  const id = req.body.id || '';
+  const account = req.body.account || '';
+  const comment = req.body.comment || '';
+
+  try {
+    if (account === admin) {
+      throw new Error('没有权限！');
+    }
+
+    await SayToMe.update(id, { comment });
+    res.json({ code: 1 });
+  } catch (err) {
+    res.json({ code: 0, message: err.message });
+  }
+}
+
 function checkPermission(account) {
   let hasPermission = false;
 
-  if (xsPhone[account]) {
+  if (xsPhone[account] || config.DEV) {
     hasPermission = true;
   }
 
-  if (xsEmail[account]) {
+  if (xsEmail[account] || config.DEV) {
     hasPermission = true;
   }
 
   return hasPermission;
+}
+
+export async function studentWorks(req, res) {
+  try {
+    let data = await StudentWorks.find();
+    console.log(data);
+    for (let i = 0; i < data.length; i++) {
+      data[i].description = md.render(data[i].description);
+    }
+
+    res.json({ code: 1, data });
+  } catch (err) {
+    res.json({ code: 0, message: err.message });
+  }
+}
+
+export async function addStudentWork(req, res) {
+  const name = req.body.name || '';
+  const account = req.body.account || '';
+  const url = req.body.url || '';
+  const member = req.body.member || '';
+  const description = req.body.description || '';
+
+  console.log(req.body);
+
+  try {
+    if (!account || !name || !url) {
+      throw new Error('name or account or url is null');
+    }
+
+    if (!checkPermission(account)) {
+      throw new Error('没有权限！' + account + ' 是你在新大注册的账号吗？');
+    }
+
+    let result = await StudentWorks.findOne({ account });
+    if (result) {
+      result.name = name;
+      result.url = url;
+      result.member = member;
+      result.description = description;
+      let data = await result.save();
+      data.description = md.render(data.description);
+      res.json({ code: 1, data });
+    } else {
+      let data = await StudentWorks.create(
+        name,
+        account,
+        url,
+        member,
+        description
+      );
+      data.description = md.render(data.description);
+      res.json({ code: 1, data });
+    }
+  } catch (err) {
+    res.json({ code: 0, message: err.message });
+  }
+}
+
+export async function deleteStudentWork(req, res) {
+  const account = req.body.account || '';
+
+  try {
+    if (!account) {
+      throw new Error('name or account or description is null');
+    }
+
+    if (!checkPermission(account)) {
+      throw new Error('没有权限！' + account + ' 是你在新大注册的账号吗？');
+    }
+
+    let result = await StudentWorks.findOne({ account });
+    if (result) {
+      result.delete = true;
+      await result.save();
+      res.json({ code: 1 });
+    } else {
+      throw new Error('删除无效，这不是你的数据吧？！');
+    }
+  } catch (err) {
+    res.json({ code: 0, message: err.message });
+  }
 }
