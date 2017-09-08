@@ -1,3 +1,6 @@
+以下 api 路径均以 `https://js.xinshengdaxue.com` 为前缀
+
+
 ## 获取心里话
 
 ```
