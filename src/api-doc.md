@@ -11,9 +11,15 @@ id: 第一期课程为1
 
 #### 结果
 ```
+// 处理正常code:1
 {
-  code, // 1: 处理正常，2：处理错误
+  code, 
   words
+}
+// 处理错误code:0
+{
+  code, 
+  message
 }
 ```
 
@@ -27,9 +33,15 @@ id: 第一期课程为1
 
 #### 结果
 ```
+// 处理正常code:1
 {
-  code, // 1: 处理正常，2：处理错误
+  code, 
   courseInfo
+}
+// 处理错误code:0
+{
+  code, 
+  message
 }
 ```
 
@@ -43,9 +55,15 @@ id: 第一期课程为1
 
 #### 结果
 ```
+// 处理正常code:1
 {
-  code, // 1: 处理正常，2：处理错误
+  code, 
   catelog
+}
+// 处理错误code:0
+{
+  code, 
+  message
 }
 ```
 
@@ -60,9 +78,15 @@ number: 第一节为1
 
 #### 结果
 ```
+// 处理正常code:1
 {
-  code, // 1: 处理正常，2：处理错误
+  code, 
   homeworks
+}
+// 处理错误code:0
+{
+  code, 
+  message
 }
 ```
 
@@ -76,9 +100,15 @@ id: 第一期课程为1
 
 #### 结果
 ```
+// 处理正常code:1
 {
-  code, // 1: 处理正常，2：处理错误
+  code, 
   teams
+}
+// 处理错误code:0
+{
+  code, 
+  message
 }
 ```
 
@@ -96,9 +126,19 @@ body: {
 
 #### 结果
 ```
+// 处理正常code:1
 {
-  code, // 1: 处理正常，2：处理错误
-  message,
+  code, 
   data,
+}
+// 处理错误code:0，表单不完整
+{
+  code, 
+  message: name or account or content is null
+}
+// 处理错误code:2，新大账号不匹配
+{
+  code, 
+  data
 }
 ```
