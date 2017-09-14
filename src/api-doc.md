@@ -13,7 +13,8 @@ id: 第一期课程为1
 ```
 // 处理正常code:1
 {
-  code, 
+  code, // 1: 处理正常，0：处理错误
+  message, // code === 0 时返回
   words
 }
 // 处理错误code:0
@@ -35,7 +36,8 @@ id: 第一期课程为1
 ```
 // 处理正常code:1
 {
-  code, 
+  code, // 1: 处理正常，0：处理错误
+  message, // code === 0 时返回
   courseInfo
 }
 // 处理错误code:0
@@ -57,7 +59,8 @@ id: 第一期课程为1
 ```
 // 处理正常code:1
 {
-  code, 
+  code, // 1: 处理正常，0：处理错误
+  message, // code === 0 时返回
   catelog
 }
 // 处理错误code:0
@@ -80,7 +83,8 @@ number: 第一节为1
 ```
 // 处理正常code:1
 {
-  code, 
+  code, // 1: 处理正常，0：处理错误
+  message, // code === 0 时返回
   homeworks
 }
 // 处理错误code:0
@@ -102,7 +106,8 @@ id: 第一期课程为1
 ```
 // 处理正常code:1
 {
-  code, 
+  code, // 1: 处理正常，0：处理错误
+  message, // code === 0 时返回
   teams
 }
 // 处理错误code:0
@@ -128,7 +133,8 @@ body: {
 ```
 // 处理正常code:1
 {
-  code, 
+  code, // 1: 处理正常，0：处理错误
+  message, // code === 0 时返回
   data,
 }
 // 处理错误code:0，表单不完整

@@ -105,14 +105,9 @@ const topicsList = [
       'https://github.com/xugy0926/getting-started-with-javascript/blob/master/topics/%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E7%AE%80%E6%98%8E%E6%8A%80%E5%B7%A7.md'
   },
   {
-    title: '立即返回函数',
+    title: '同步函数的两种返回结果',
     url:
-      'https://github.com/xugy0926/getting-started-with-javascript/blob/master/topics/%E7%AB%8B%E5%8D%B3%E8%BF%94%E5%9B%9E%E5%87%BD%E6%95%B0.md'
-  },
-  {
-    title: '间接返回函数',
-    url:
-      'https://github.com/xugy0926/getting-started-with-javascript/blob/master/topics/%E9%97%B4%E6%8E%A5%E8%BF%94%E5%9B%9E%E5%87%BD%E6%95%B0.md'
+      'https://github.com/xugy0926/getting-started-with-javascript/blob/master/topics/%E5%90%8C%E6%AD%A5%E5%87%BD%E6%95%B0%E7%9A%84%E4%B8%A4%E7%A7%8D%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C%E7%9A%84%E6%96%B9%E5%BC%8F.md'
   },
   {
     title: '相对路径',
