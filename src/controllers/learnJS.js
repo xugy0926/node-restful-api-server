@@ -79,13 +79,13 @@ export function ranking(req, res) {
   const id = req.params.id;
   const filePath = config.rankingFilePath + '_' + id + '.json';
 
-  jsonfile.readFile(filePath, function(err, words) {
+  jsonfile.readFile(filePath, function(err, ranking) {
     if (err) {
       res.json({ code: 0, message: '获取数据失败' });
       return;
     }
 
-    res.json({ code: 1, words });
+    res.json({ code: 1, ranking });
   });
 }
 

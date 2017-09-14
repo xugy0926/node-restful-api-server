@@ -11,16 +11,10 @@ id: 第一期课程为1
 
 #### 结果
 ```
-// 处理正常code:1
 {
   code, // 1: 处理正常，0：处理错误
   message, // code === 0 时返回
   words
-}
-// 处理错误code:0
-{
-  code, 
-  message
 }
 ```
 
@@ -34,16 +28,10 @@ id: 第一期课程为1
 
 #### 结果
 ```
-// 处理正常code:1
 {
   code, // 1: 处理正常，0：处理错误
   message, // code === 0 时返回
   courseInfo
-}
-// 处理错误code:0
-{
-  code, 
-  message
 }
 ```
 
@@ -57,16 +45,10 @@ id: 第一期课程为1
 
 #### 结果
 ```
-// 处理正常code:1
 {
   code, // 1: 处理正常，0：处理错误
   message, // code === 0 时返回
   catelog
-}
-// 处理错误code:0
-{
-  code, 
-  message
 }
 ```
 
@@ -81,16 +63,10 @@ number: 第一节为1
 
 #### 结果
 ```
-// 处理正常code:1
 {
   code, // 1: 处理正常，0：处理错误
   message, // code === 0 时返回
   homeworks
-}
-// 处理错误code:0
-{
-  code, 
-  message
 }
 ```
 
@@ -104,16 +80,10 @@ id: 第一期课程为1
 
 #### 结果
 ```
-// 处理正常code:1
 {
   code, // 1: 处理正常，0：处理错误
   message, // code === 0 时返回
   teams
-}
-// 处理错误code:0
-{
-  code, 
-  message
 }
 ```
 
@@ -131,20 +101,26 @@ body: {
 
 #### 结果
 ```
-// 处理正常code:1
 {
   code, // 1: 处理正常，0：处理错误
   message, // code === 0 时返回
   data,
 }
-// 处理错误code:0，表单不完整
+```
+
+## 作业榜
+
+```
+[GET] /api/v1/learnJS/course/:id/ranking
+
+id: 第一期课程为1
+```
+
+#### 结果
+```
 {
-  code, 
-  message: name or account or content is null
-}
-// 处理错误code:2，新大账号不匹配
-{
-  code, 
-  data
+  code, // 1: 处理正常，0：处理错误
+  message, // code === 0 时返回
+  ranking,
 }
 ```
