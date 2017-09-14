@@ -24,6 +24,7 @@ for (const x of emailData) {
 }
 
 let catelogContent = require('../public/content/catelog');
+catelogContent.pptList = [];
 
 export function courseInfo(req, res) {
   res.json({
