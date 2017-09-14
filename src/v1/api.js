@@ -19,6 +19,8 @@ router.get('/learnJS/course/:id/homework/:number', learnJS.homework);
 router.put('/learnJS/course/:id/homework/:number', learnJS.updateHomework);
 router.get('/learnJS/course/:id/teams', learnJS.teams);
 router.put('/learnJS/course/:id/teams', learnJS.updateTeams);
+router.get('/learnJS/course/:id/ranking', learnJS.ranking);
+router.put('/learnJS/course/:id/ranking', learnJS.updateRanking);
 router.get('/learnJS/course/:id/studentWorks', learnJS.studentWorks);
 router.post('/learnJS/course/:id/studentWorks', learnJS.addStudentWork);
 router.delete('/learnJS/course/:id/studentWorks', learnJS.deleteStudentWork);

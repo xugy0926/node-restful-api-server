@@ -75,6 +75,40 @@ export function updateWords(req, res) {
   });
 }
 
+export function ranking(req, res) {
+  const id = req.params.id;
+  const filePath = config.rankingFilePath + '_' + id + '.json';
+
+  jsonfile.readFile(filePath, function(err, words) {
+    if (err) {
+      res.json({ code: 0, message: '获取数据失败' });
+      return;
+    }
+
+    res.json({ code: 1, words });
+  });
+}
+
+export function updateRanking(req, res) {
+  const id = req.params.id;
+  const ranking = req.body.ranking;
+  const filePath = config.rankingFilePath + '_' + id + '.json';
+
+  try {
+    fs.unlinkSync(filePath);
+  } catch (err) {
+    // do nothing
+  }
+
+  jsonfile.writeFile(filePath, ranking, { spaces: 2 }, function(err) {
+    if (err) {
+      res.json({ code: 0, message: '更新失败' });
+    } else {
+      res.json({ code: 1, message: '更新成功' });
+    }
+  });
+}
+
 export function homeworkInfo(req, res) {
   const id = req.params.id;
 
@@ -101,7 +135,7 @@ export function homeworkInfo(req, res) {
 export function homework(req, res) {
   const id = req.params.id;
   const number = req.params.number;
-  var filePath = config.homeworkPath + '/lesson' + id + '_' + number + '.json';
+  const filePath = config.homeworkPath + '/lesson' + id + '_' + number + '.json';
 
   jsonfile.readFile(filePath, function(err, homeworks) {
     if (err) {
@@ -115,7 +149,7 @@ export function homework(req, res) {
 export function updateHomework(req, res) {
   const id = req.params.id;
   const number = req.params.number;
-  var filePath = config.homeworkPath + '/lesson' + id + '_' + number + '.json';
+  const filePath = config.homeworkPath + '/lesson' + id + '_' + number + '.json';
   const homeworkInfo = req.body.homeworkInfo;
 
   try {
