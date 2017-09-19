@@ -207,6 +207,7 @@ export async function sayToMe(req, res) {
 
     for (let i = 0; i < data.length; i++) {
       data[i].content = md.render(data[i].content);
+      data[i].account = '';
     }
 
     res.json({ code: 1, data });
