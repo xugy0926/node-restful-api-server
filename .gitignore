@@ -65,3 +65,5 @@ user.phone_data.js
 
 admin.js
 
+config/mongodb.pro.js
+

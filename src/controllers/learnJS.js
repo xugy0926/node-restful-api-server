@@ -1,4 +1,4 @@
-import * as config from '../config';
+import config from '../config';
 import fs from 'fs';
 import jsonfile from 'jsonfile';
 import * as SayToMe from '../data/proxy/sayToMe';
